@@ -6,7 +6,9 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(SRCS
-    src/main.cpp src/lexer/lexer.cpp 
+    src/main.cpp 
+    src/utils/utils.cpp
+    src/lexer/lexer.cpp 
     src/parser/parser.cpp 
     src/ast/expressions/expr_ast.cpp 
     src/ast/expressions/binaryexpr_ast.cpp 

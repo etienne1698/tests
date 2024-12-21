@@ -53,7 +53,8 @@ unique_ptr<ExprAST> Parser::parseIdentifierExpr()
         if (currentToken == ')')
             break;
         if (currentToken != ',')
-            return logError("Expected ')' or ',' in argument list");
+            logError("Expected ')' or ',' in argument list");
+            return nullptr;
         getNextToken();
     }
     getNextToken();
@@ -100,7 +101,8 @@ unique_ptr<ExprAST> Parser::parseParentesisExpr()
         return nullptr;
     getNextToken();
     if (currentToken != ')')
-        return logError("expected ')'");
+        logError("expected ')'");
+        return nullptr;
     getNextToken();
     return V;
 }
@@ -180,12 +182,6 @@ unique_ptr<ProgramAST> Parser::parse()
             break;
         }
     }
-}
-
-unique_ptr<ExprAST> Parser::logError(string err)
-{
-    cout << "\033[31;1;4m" << err << "\033[0m" << "\n";
-    return nullptr;
 }
 
 unique_ptr<ExprAST> Parser::parseBinOp(int exprPrec,

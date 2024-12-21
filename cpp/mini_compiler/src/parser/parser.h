@@ -3,6 +3,8 @@
 #include <string>
 #include "memory"
 
+#include "../utils/utils.h"
+
 #include "../lexer/lexer.h"
 
 #include "../ast/expressions/expr_ast.h"
@@ -35,7 +37,6 @@ class Parser
     std::unique_ptr<ExprAST> parseBinOp(int exprPrec,
                                            std::unique_ptr<ExprAST> left);
 
-    std::unique_ptr<ExprAST> logError(std::string err);
     char currentToken;
     void getNextToken();
     int getTokenPrecedence();

@@ -4,6 +4,8 @@
 #include <sstream>
 #include <string.h>
 
+#include "./utils/utils.h"
+
 #include "lexer/lexer.h"
 #include "parser/parser.h"
 #include "ast_visitor/nasm_ast_visitor.h"
@@ -25,7 +27,7 @@ int main(int argc, char *argv[])
 
     if (argc < 2)
     {
-        cout << "\033[31;1;4m" << "Filename required" << "\033[0m" << "\n";
+        logError("Filename required");
         return 0;
     }
 
