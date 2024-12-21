@@ -94,6 +94,7 @@ unique_ptr<ExprAST> Parser::parseExpr()
  */
 unique_ptr<ExprAST> Parser::parseParentesisExpr()
 {
+    getNextToken();
     auto V = parseExpr();
     if (!V)
         return nullptr;
@@ -148,9 +149,11 @@ unique_ptr<StatementAST> Parser::parseFuncDefStat()
 
 unique_ptr<StatementAST> Parser::parsePrintStat()
 {
+    getNextToken();
     auto V = parseExpr();
     if (!V)
         return nullptr;
+    cout << "Parse Print: " << "\n";
     return make_unique<PrintStatementAST>(move(V));
 }
 

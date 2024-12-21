@@ -16,6 +16,10 @@ set(SRCS
     src/ast/statements/statement_ast.cpp 
     src/ast/statements/prototypestat_ast.cpp 
     src/ast/statements/returnstat_ast.cpp
+    src/ast/statements/printstat_ast.cpp
+
+    src/ast_visitor/ast_visitor.cpp
+    src/ast_visitor/nasm_ast_visitor.cpp
     )
 
 add_executable(compile ${SRCS})
