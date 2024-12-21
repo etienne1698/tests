@@ -1,31 +1,28 @@
 section .data
-    message db "Hello, World!", 0Ah  ; Message avec un saut de ligne
+    message db "Hello, World!", 0Ah  ; Message avec saut de ligne
     msg_len equ $ - message          ; Longueur du message
 
-section .bss
-    hConsole resd 1                  ; Handle de la console
-
 section .text
-    global main                      ; Point d'entrée du programme
+    global main                      ; Point d'entrée
 
-extern GetStdHandle                 ; Fonction pour obtenir le handle de la console
-extern WriteConsoleA                ; Fonction pour écrire sur la console
-extern ExitProcess                  ; Fonction pour quitter le programme
+    extern _GetStdHandle@4           ; Symboles externes avec décorations
+    extern _WriteConsoleA@20
+    extern _ExitProcess@4
 
 main:
-    ; Obtenir le handle de la sortie standard (STD_OUTPUT_HANDLE)
-    push -11                         ; STD_OUTPUT_HANDLE
-    call GetStdHandle
-    mov [hConsole], eax              ; Stocker le handle
+    ; Obtenir le handle de la console standard
+    push -11                         ; STD_OUTPUT_HANDLE (-11)
+    call _GetStdHandle@4
+    mov ebx, eax                     ; Stocker le handle dans EBX
 
     ; Écrire le message sur la console
-    push 0                           ; Pas de structure d'écriture (NULL)
-    push dword 0                     ; Pas de retour d'octets écrits (NULL)
+    push 0                           ; NULL (Pas d'overlapped structure)
+    push dword 0                     ; NULL (Pas de bytes_written)
     push dword msg_len               ; Taille du message
     push message                     ; Adresse du message
-    push dword [hConsole]            ; Handle de la console
-    call WriteConsoleA
+    push dword ebx                   ; Handle de la console
+    call _WriteConsoleA@20
 
     ; Quitter le programme
-    push 0                           ; Code de sortie
-    call ExitProcess
+    push 0                           ; Code de retour
+    call _ExitProcess@4
