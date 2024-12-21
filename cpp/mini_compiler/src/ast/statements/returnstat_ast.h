@@ -11,7 +11,7 @@ class ReturnStatementAST : public StatementAST
     std::unique_ptr<ExprAST> returnExpr;
 
 public:
-    ReturnStatementAST(std::unique_ptr<ExprAST>);
+    ReturnStatementAST(std::unique_ptr<ExprAST> expr);
 };
 
 #endif

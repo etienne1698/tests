@@ -6,7 +6,7 @@ cmake --build build
 
 # Run 
 ```
-.\build\Debug\compile
+.\build\Debug\compile tests/simple.cm
 ```
 
 # "cm" langage description and examples

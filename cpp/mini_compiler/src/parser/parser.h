@@ -13,6 +13,7 @@
 
 #include "../ast/statements/prototypestat_ast.h"
 #include "../ast/statements/returnstat_ast.h"
+#include "../ast/statements/printstat_ast.h"
 
 #ifndef PARSER_H
 #define PARSER_H
@@ -20,7 +21,9 @@
 class Parser
 {
     Lexer lexer;
-    std::unique_ptr<StatementAST> parseFuncDef();
+    std::unique_ptr<StatementAST> parseFuncDefStat();
+    std::unique_ptr<StatementAST> parsePrintStat();
+    
 
     std::unique_ptr<ExprAST> parseExpr();
 

@@ -94,7 +94,6 @@ unique_ptr<ExprAST> Parser::parseExpr()
  */
 unique_ptr<ExprAST> Parser::parseParentesisExpr()
 {
-    getNextToken();
     auto V = parseExpr();
     if (!V)
         return nullptr;
@@ -111,7 +110,7 @@ unique_ptr<ExprAST> Parser::parseNumberExpr()
     return move(Result);
 }
 
-unique_ptr<StatementAST> Parser::parseFuncDef()
+unique_ptr<StatementAST> Parser::parseFuncDefStat()
 {
     getNextToken();
     if (currentToken != TOKEN_IDENTIFIER)
@@ -147,6 +146,14 @@ unique_ptr<StatementAST> Parser::parseFuncDef()
     return make_unique<PrototypeStatementAST>(identifierName, move(args));
 }
 
+unique_ptr<StatementAST> Parser::parsePrintStat()
+{
+    auto V = parseExpr();
+    if (!V)
+        return nullptr;
+    return make_unique<PrintStatementAST>(move(V));
+}
+
 void Parser::parse()
 {
     while (true)
@@ -157,7 +164,10 @@ void Parser::parse()
         case TOKEN_EOF:
             return;
         case TOKEN_DEF:
-            parseFuncDef();
+            parseFuncDefStat();
+            break;
+        case TOKEN_PRINT:
+            parsePrintStat();
             break;
         default:
             parseExpr();
@@ -173,7 +183,7 @@ unique_ptr<ExprAST> Parser::logError(string err)
 }
 
 unique_ptr<ExprAST> Parser::parseBinOp(int exprPrec,
-                                            unique_ptr<ExprAST> left)
+                                       unique_ptr<ExprAST> left)
 {
 
     while (true)

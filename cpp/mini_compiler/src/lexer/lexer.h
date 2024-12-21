@@ -7,6 +7,7 @@ enum TOKEN
     TOKEN_DEF = -2,
     TOKEN_IDENTIFIER = -3,
     TOKEN_NUMBER = -4,
+    TOKEN_PRINT = -5,
 };
 
 class Lexer

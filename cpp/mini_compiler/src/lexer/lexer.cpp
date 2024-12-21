@@ -39,6 +39,10 @@ char Lexer::getNextToken()
         {
             return TOKEN_DEF;
         }
+        if (identifierStr == "print")
+        {
+            return TOKEN_PRINT;
+        }
         return TOKEN_IDENTIFIER;
     }
 
