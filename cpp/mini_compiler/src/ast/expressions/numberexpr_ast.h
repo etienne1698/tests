@@ -5,10 +5,10 @@
 
 class NumberExprAST : public ExprAST
 {
-  double val;
 
 public:
   NumberExprAST(double Val);
+  double val;
 };
 
 #endif
