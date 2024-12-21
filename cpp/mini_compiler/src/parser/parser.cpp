@@ -157,17 +157,20 @@ unique_ptr<StatementAST> Parser::parsePrintStat()
     return make_unique<PrintStatementAST>(move(V));
 }
 
-void Parser::parse()
+unique_ptr<ProgramAST> Parser::parse()
 {
+
+    vector<unique_ptr<StatementAST>> statments;
+
     while (true)
     {
         getNextToken();
         switch (currentToken)
         {
         case TOKEN_EOF:
-            return;
+            return make_unique<ProgramAST>(move(statments));
         case TOKEN_DEF:
-            parseFuncDefStat();
+            statments.push_back(parseFuncDefStat());
             break;
         case TOKEN_PRINT:
             parsePrintStat();

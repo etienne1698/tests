@@ -20,6 +20,9 @@ set(SRCS
 
     src/ast_visitor/ast_visitor.cpp
     src/ast_visitor/nasm_ast_visitor.cpp
+
+    src/ast/ast.cpp
+    src/ast/program_ast.cpp
     )
 
 add_executable(compile ${SRCS})

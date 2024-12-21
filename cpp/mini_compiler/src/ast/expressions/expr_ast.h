@@ -1,9 +1,10 @@
+#include "../ast.h"
+
 #ifndef EXPR_AST_H
 #define EXPR_AST_H
 
-class ExprAST {
-public:
-  virtual ~ExprAST();
+class ExprAST: public AST {
+
 };
 
 #endif

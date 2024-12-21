@@ -14,6 +14,7 @@
 #include "../ast/statements/prototypestat_ast.h"
 #include "../ast/statements/returnstat_ast.h"
 #include "../ast/statements/printstat_ast.h"
+#include "../ast/program_ast.h"
 
 #ifndef PARSER_H
 #define PARSER_H
@@ -42,7 +43,7 @@ class Parser
 
 public:
     explicit Parser(const Lexer &lexer);
-    void parse();
+    std::unique_ptr<ProgramAST> parse();
 };
 
 #endif

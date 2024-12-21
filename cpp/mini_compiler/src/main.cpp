@@ -6,6 +6,7 @@
 
 #include "lexer/lexer.h"
 #include "parser/parser.h"
+#include "ast_visitor/nasm_ast_visitor.h"
 
 using namespace std;
 
@@ -30,7 +31,9 @@ int main(int argc, char *argv[])
 
     Lexer lexer = Lexer(getFileContent(argv[1]));
     Parser parser = Parser(lexer);
-    parser.parse();
+    auto ast = parser.parse();
+
+    auto nasmASTVisitor = NasmASTVisitor();
 
     return 0;
 }

@@ -8,6 +8,7 @@
 
 #include "../ast/statements/prototypestat_ast.h"
 #include "../ast/statements/returnstat_ast.h"
+#include "../ast/statements/printstat_ast.h"
 
 #ifndef AST_VISITOR_H
 #define AST_VISITOR_H
@@ -22,6 +23,7 @@ public:
     virtual void visit(CallExprAST &expr) = 0;
     virtual void visit(BinaryExprAST &expr) = 0;
 
+    virtual void visit(PrintStatementAST &expr) = 0;
     virtual void visit(PrototypeStatementAST &expr) = 0;
     virtual void visit(ReturnStatementAST &expr) = 0;
 };

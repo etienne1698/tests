@@ -1,9 +1,9 @@
+#include "../ast.h"
+
 #ifndef STATEMENT_AST_H
 #define STATEMENT_AST_H
 
-class StatementAST {
-public:
-  virtual ~StatementAST();
+class StatementAST: public AST {
 };
 
 #endif
