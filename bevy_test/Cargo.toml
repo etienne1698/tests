@@ -1,5 +1,5 @@
 [package]
-name = "mario_kart_clone"
+name = "bevy_test"
 version = "0.1.0"
 edition = "2021"
 
