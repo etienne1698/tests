@@ -1,11 +1,7 @@
 use bevy::prelude::*;
 
-mod systems;
-
-use systems::follow_camera::follow_camera;
-use systems::move_player::move_player;
-
 use crate::components::{FollowCamera, Player};
+use crate::systems::{follow_camera, move_player};
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     // camera
