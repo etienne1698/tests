@@ -1,7 +1,3 @@
-use bevy::prelude::*;
+pub mod player;
 
-#[derive(Component)]
-pub struct Person;
-
-#[derive(Component)]
-pub struct Name(pub String);
+pub use player::*;
