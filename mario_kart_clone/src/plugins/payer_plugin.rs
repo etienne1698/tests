@@ -1,5 +1,7 @@
 use bevy::prelude::*;
 
+use bevy_rapier3d::prelude::*;
+
 use crate::components::{FollowCamera, Player};
 use crate::systems::{follow_camera, move_with_keyboard};
 
@@ -13,8 +15,10 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
 
     commands.spawn((
         SceneRoot(asset_server.load(GltfAssetLabel::Scene(0).from_asset("3d/player.glb"))),
-        Transform::from_xyz(0.0, 0.0, 0.0),
+        Transform::from_xyz(0.0, 2.0, 0.0),
         Player,
+        RigidBody::Dynamic,
+        Collider::cuboid(1.0, 1.0, 1.0),
     ));
 }
 
