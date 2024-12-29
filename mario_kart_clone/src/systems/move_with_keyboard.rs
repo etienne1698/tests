@@ -1,12 +1,11 @@
 use bevy::prelude::*;
-use crate::components::Player;
-
+use bevy::ecs::component::Component;
 
 const SPEED: f32 = 0.1;
 
-pub fn move_player(
+pub fn move_with_keyboard<T: Component>(
     keys: Res<ButtonInput<KeyCode>>,
-    mut query: Query<&mut Transform, With<Player>>,
+    mut query: Query<&mut Transform, With<T>>,
 ) {
     for mut transform in &mut query {
         let forward = transform.rotation * Vec3::Z;

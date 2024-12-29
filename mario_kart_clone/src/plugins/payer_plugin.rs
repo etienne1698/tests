@@ -1,7 +1,7 @@
 use bevy::prelude::*;
 
 use crate::components::{FollowCamera, Player};
-use crate::systems::{follow_camera, move_player};
+use crate::systems::{follow_camera, move_with_keyboard};
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
     // camera
@@ -22,6 +22,13 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, setup);
-        app.add_systems(Update, (move_player, follow_camera).chain());
+        app.add_systems(
+            Update,
+            (
+                move_with_keyboard::<Player>,
+                follow_camera::<Player, FollowCamera>,
+            )
+                .chain(),
+        );
     }
 }
