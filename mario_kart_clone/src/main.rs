@@ -4,7 +4,7 @@ mod systems;
 
 use bevy::prelude::*;
 use plugins::basic_scene_plugin::*;
-use plugins::player_plugin::*;
+use plugins::payer_plugin::*;
 
 fn main() {
     App::new()
