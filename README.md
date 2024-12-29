@@ -8,5 +8,3 @@ Future projects :
 - write OS kernel
 - write a compiler
 - write a (jit) interpreter
-- write a web browser
-- write a 3D engine (for game or CAO engine)

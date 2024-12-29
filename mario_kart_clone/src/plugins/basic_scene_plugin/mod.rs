@@ -1,22 +1,10 @@
 use bevy::prelude::*;
 
-fn setup(
-    mut commands: Commands,
-    mut meshes: ResMut<Assets<Mesh>>,
-    mut materials: ResMut<Assets<StandardMaterial>>,
-) {
-    // circular base
-    commands.spawn((
-        Mesh3d(meshes.add(Circle::new(4.0))),
-        MeshMaterial3d(materials.add(Color::WHITE)),
-        Transform::from_rotation(Quat::from_rotation_x(-std::f32::consts::FRAC_PI_2)),
-    ));
-    // cube
-    commands.spawn((
-        Mesh3d(meshes.add(Cuboid::new(1.0, 1.0, 1.0))),
-        MeshMaterial3d(materials.add(Color::srgb_u8(124, 144, 255))),
-        Transform::from_xyz(0.0, 0.5, 0.0),
-    ));
+fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
+    commands.spawn((SceneRoot(
+        asset_server.load(GltfAssetLabel::Scene(0).from_asset("3d/basic_scene.glb")),
+    ),));
+
     // light
     commands.spawn((
         PointLight {
