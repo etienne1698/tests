@@ -6,7 +6,7 @@ const GRAVITY: f32 = -9.81;
 
 pub fn kinematic_gravity<T: Component>(
     time: Res<Time>,
-    mut controllers: Query<&mut KinematicCharacterController>,
+    mut controllers: Query<&mut KinematicCharacterController, With<T>>,
 ) {
     for mut controller in controllers.iter_mut() {
         let mut translation: Vec3 = controller.translation.unwrap_or(Vec3::ZERO);
