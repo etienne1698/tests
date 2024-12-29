@@ -1,13 +1,11 @@
 use bevy::prelude::*;
 
-#[derive(Component)]
-struct Person;
+use crate::components::{Person, Name};
 
-#[derive(Component)]
-struct Name(String);
 
 #[derive(Resource)]
 struct GreetTimer(Timer);
+
 
 fn greet_people(time: Res<Time>, mut timer: ResMut<GreetTimer>, query: Query<&Name, With<Person>>) {
     // update our timer with the time elapsed since the last update
