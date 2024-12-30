@@ -3,15 +3,13 @@ use bevy::prelude::*;
 use bevy_rapier3d::prelude::*;
 
 use crate::components::{FollowCamera, Player};
-use crate::systems::{follow_camera, move_with_keyboard, kinematic_gravity};
+use crate::resources::PlayerResource;
+use crate::systems::{follow_camera, kinematic_gravity, move_with_keyboard};
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    // camera
-    commands.spawn((
-        Camera3d::default(),
-        Transform::from_xyz(0.0, 2.0, 4.0),
-        FollowCamera,
-    ));
+    commands.insert_resource(PlayerResource {
+        run: asset_server.load(GltfAssetLabel::Animation(1).from_asset("3d/player.glb")),
+    });
 
     commands.spawn((
         Player,
@@ -23,6 +21,37 @@ fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
             ..KinematicCharacterController::default()
         },
     ));
+
+    // camera
+    commands.spawn((
+        Camera3d::default(),
+        Transform::from_xyz(0.0, 2.0, 4.0),
+        FollowCamera,
+    ));
+}
+
+fn setup_animations(
+    mut has_setup: Local<bool>,
+    mut commands: Commands,
+    mut players: Query<(Entity, &mut AnimationPlayer)>,
+    player_resource: Res<PlayerResource>,
+    mut graphs: ResMut<Assets<AnimationGraph>>,
+) {
+    if *has_setup {
+        return;
+    }
+    for (entity, mut player) in &mut players {
+        // The name of the entity in the GLTF scene containing the AnimationPlayer for our morph targets is "Main"
+       
+
+        let (graph, animation) = AnimationGraph::from_clip(player_resource.run.clone());
+        commands
+            .entity(entity)
+            .insert(AnimationGraphHandle(graphs.add(graph)));
+
+        player.play(animation).repeat();
+        *has_setup = true;
+    }
 }
 
 pub struct PlayerPlugin;
@@ -37,6 +66,7 @@ impl Plugin for PlayerPlugin {
                 kinematic_gravity::<Player>,
             )
                 .chain(),
-        );
+        ).add_systems(Update, setup_animations);
+        
     }
 }

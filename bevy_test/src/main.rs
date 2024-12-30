@@ -1,6 +1,7 @@
 mod plugins;
 mod components;
 mod systems;
+mod resources;
 
 use bevy::prelude::*;
 use plugins::basic_scene_plugin::*;
