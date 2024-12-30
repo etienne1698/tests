@@ -41,9 +41,6 @@ fn setup_animations(
         return;
     }
     for (entity, mut player) in &mut players {
-        // The name of the entity in the GLTF scene containing the AnimationPlayer for our morph targets is "Main"
-       
-
         let (graph, animation) = AnimationGraph::from_clip(player_resource.run.clone());
         commands
             .entity(entity)
