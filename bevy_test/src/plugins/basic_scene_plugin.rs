@@ -16,17 +16,19 @@ fn generate_trees(mut commands: Commands, asset_server: Res<AssetServer>) {
         commands.spawn((
             SceneRoot(tree_asset_3d.clone()), 
             Transform::from_xyz(x, y, z),
+            RigidBody::Fixed,
+            Collider::cuboid(1.0, 4.0, 1.0),
         ));
     }
 }
 
 fn setup(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let player_asset_3d =
+    let basic_scene_asset_3d =
         asset_server.load(GltfAssetLabel::Scene(0).from_asset("3d/basic_scene.glb"));
 
     commands.spawn((
-        SceneRoot(player_asset_3d),
-        Transform::from_xyz(0.0, 0.0, 0.0),
+        SceneRoot(basic_scene_asset_3d),
+        Transform::from_xyz(0.0, -1.0, 0.0),
         RigidBody::Fixed,
         Collider::cuboid(100.0, 1.0, 100.0),
     ));
